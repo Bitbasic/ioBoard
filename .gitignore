@@ -3,5 +3,4 @@
 composer.phar
 composer.lock
 .DS_Store
-Thumbs.db
-app/config/database.php
+Thumbs.db/app/config/database.php
