@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'contacts_test',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'pantera1',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

@@ -13,6 +13,13 @@
           <th>Comments</th>
           <th></th>
         </thead>
+
+
+        @if(count($futures) == 0)
+        <tr>
+          <td colspan="5">No Future Statuses Found</td>
+        </tr>
+        @else
         @foreach($futures as $future)
         <tr>
           <td>{{$future->status}}</td>
@@ -33,6 +40,7 @@
           </td>
         </tr>
         @endforeach
+        @endif
       </table>
 
       <hr>

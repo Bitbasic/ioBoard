@@ -47,7 +47,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{{URL::to('account')}}"><img src="{{ asset('assets/img/logo.png') }}" alt="" class="logo" style="width:75px;"></a>
+					<a class="navbar-brand" href="{{URL::to('account')}}"><img src="{{ asset('assets/img/logo.png') }}" alt="" class="logo" ></a>
 				</div>
 				<div class="collapse navbar-collapse">
 					@if(Session::has('auth_token'))

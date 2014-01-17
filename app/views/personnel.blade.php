@@ -33,6 +33,17 @@ $('.data-table').dataTable({
   }
 });
 
+
+
+$('.date').datetimepicker({
+  icons: {
+    time: "fa fa-clock-o",
+    date: "fa fa-calendar",
+    up: "fa fa-arrow-up",
+    down: "fa fa-arrow-down"
+  }
+});
+
 $('.status').on('click',function(){
 
   $.get("{{URL::to('status')}}/"+$(this).attr('data-id'),function(data){
