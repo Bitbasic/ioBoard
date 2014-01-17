@@ -1,0 +1,24 @@
+
+body {
+	padding: 90px 0;
+}
+
+input[type="submit"]{
+	margin-bottom:0px!important;
+}
+
+.panel-heading{
+	font-size: 18px;
+}
+
+
+.navbar-brand{
+	padding:7px!important;
+	margin-right: 50px;
+}
+
+.delete-future{
+	cursor:pointer;
+}
+
+

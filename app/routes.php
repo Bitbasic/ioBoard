@@ -11,7 +11,14 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@getIndex');
+
+Route::get('status/{id}', 'HomeController@getStatusForm');
+Route::post('status', 'HomeController@postStatusForm');
+
+Route::get('future/{id}', 'HomeController@getFutureForm');
+Route::post('future', 'HomeController@postFutureForm');
+Route::delete('future/{id}', 'HomeController@deleteFuture');
+
+Route::get('future-edit/{id}', 'HomeController@getEditFutureForm');
+Route::put('future-edit/{id}', 'HomeController@putEditFutureForm');
