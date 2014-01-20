@@ -50,26 +50,15 @@
 					<a class="navbar-brand" href="{{URL::to('account')}}"><img src="{{ asset('assets/img/logo.png') }}" alt="" class="logo" ></a>
 				</div>
 				<div class="collapse navbar-collapse">
-					@if(Session::has('auth_token'))
-					<ul class="nav navbar-nav">
-						<li class="{{ (Request::is('account') ? 'active' : '')}} gold" ><a href="{{URL::to('account')}}">My Account</a></li>
-						<li class="{{ (Request::is('emergency-contacts') ? 'active' : '')}} green"><a href="{{URL::to('emergency-contacts')}}">My Emergency Contacts</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="account">My Account</a></li>
-								<li class="divider"></li>
-								<li><a href="{{URL::to('logout')}}">Logout</a></li>
-							</ul>
-						</li>
-					</ul>
-					@endif
+					<form class="navbar-form navbar-right" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search" id="table-search">
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container-fluid">
 			@yield('content')
 		</div>
 		<div class="modal-container modal fade"></div>

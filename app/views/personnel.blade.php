@@ -20,8 +20,8 @@ Contacts
 @section('scripts')
 <script>
 
-$('.data-table').dataTable({
-  "sDom": "<'row'<'col-sm-12'<'pull-right'f>r<'clearfix'>>>t<'row'<'col-sm-12'<'pull-left'i><'pull-right'p><'clearfix'>>>",
+var table = $('.data-table').dataTable({
+  "sDom": "<'row'<'col-sm-12'<'pull-right'>r<'clearfix'>>>t<'row'<'col-sm-12'<'pull-left'i><'pull-right'p><'clearfix'>>>",
   "sPaginationType": "bs_normal",
   "iDisplayLength": 300,
   "oLanguage": {
@@ -31,6 +31,10 @@ $('.data-table').dataTable({
   "fnDrawCallback": function( oSettings ) {
 
   }
+});
+
+$( "#table-search" ).keyup(function() {
+  table.fnFilter($(this).val());
 });
 
 

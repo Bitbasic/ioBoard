@@ -1,4 +1,4 @@
- <table class="table table-bordered table-striped data-table">
+ <table class="table table-bordered table-striped data-table table-condensed">
       <thead>
         <th>Name</th>
         <th>Email</th>
