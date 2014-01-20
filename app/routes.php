@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@getIndex');
 
+Route::get('data', 'HomeController@getData');
+
 Route::get('status/{id}', 'HomeController@getStatusForm');
 Route::post('status', 'HomeController@postStatusForm');
 

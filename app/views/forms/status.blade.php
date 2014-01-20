@@ -32,8 +32,8 @@
 
     </div>
     <div class="modal-footer">
-      {{Form::submit('Save', array('class'=>'btn btn-success status-save'))}}
       {{Form::close()}}
+      <button class="btn btn-success status-save">Save</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     </div>
   </div>

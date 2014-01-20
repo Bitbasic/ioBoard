@@ -4,6 +4,12 @@ class HomeController extends BaseController {
 
 	public function getIndex()
 	{
+		return View::make('personnel');
+	}
+
+
+	public function getData()
+	{
 		$personnel = Personnel::all();
 
 		foreach ($personnel as $contact) {
@@ -19,7 +25,8 @@ class HomeController extends BaseController {
 				}
 			}
 		}
-		return View::make('personnel',compact('personnel'));
+
+		return View::make('contact-table',compact('personnel'));
 	}
 
 
@@ -50,7 +57,7 @@ class HomeController extends BaseController {
 		$contact->returning_time = $time;
 		$contact->save();
 
-		return Redirect::back();
+		return Response::make('200');
 	}
 
 

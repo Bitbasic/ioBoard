@@ -12,7 +12,6 @@ Contacts
 @section('content')
 <div class="row">
   <div class="col-md-12 contact-table">
-    @include('contact-table')
   </div>
 </div>
 @stop
@@ -20,84 +19,119 @@ Contacts
 @section('scripts')
 <script>
 
-var table = $('.data-table').dataTable({
-  "sDom": "<'row'<'col-sm-12'<'pull-right'>r<'clearfix'>>>t<'row'<'col-sm-12'<'pull-left'i><'pull-right'p><'clearfix'>>>",
-  "sPaginationType": "bs_normal",
-  "iDisplayLength": 300,
-  "oLanguage": {
-    "sLengthMenu": "Show _MENU_ Rows",
-    "sSearch": "Search"
-  },
-  "fnDrawCallback": function( oSettings ) {
 
-  }
-});
+// $(document).ready(function() {
+//   var table = $('.data-table').dataTable( {
+//     "bServerSide": true,
+//     "sAjaxSource": "{{URL::to('data')}}"
+//   });
 
-$( "#table-search" ).keyup(function() {
-  table.fnFilter($(this).val());
-});
+//   setInterval(function(){
+//     table.fnDraw();
+//   },10000);
+
+// });
 
 
 
-$('.date').datetimepicker({
-  icons: {
-    time: "fa fa-clock-o",
-    date: "fa fa-calendar",
-    up: "fa fa-arrow-up",
-    down: "fa fa-arrow-down"
-  }
-});
+var table = '';
 
-$('.status').on('click',function(){
+init();
 
-  $.get("{{URL::to('status')}}/"+$(this).attr('data-id'),function(data){
+setInterval(function(){
+  init();
+},30000)
 
-    $('.modal-container').modal().html(data);
-    $('#return-date').datetimepicker();
 
-    $('.status-save').on('click',function(){
-      $('#status-form').submit();
+function init () {
+  $.get("{{URL::to('data')}}",function(data){
+    $('.contact-table').html(data);
+    table = $('.data-table').dataTable({
+      "sDom": "<'row'<'col-sm-12'<'pull-right'>r<'clearfix'>>>t<'row'<'col-sm-12'<'pull-left'i><'pull-right'p><'clearfix'>>>",
+      "sPaginationType": "bs_normal",
+      "iDisplayLength": 300,
+      "oLanguage": {
+        "sLengthMenu": "Show _MENU_ Rows",
+        "sSearch": "Search"
+      },
     });
 
-    $('.reset-status').on('click',function(){
-      $('select[name="status"]').val('In');
-      $('input[name="comment"]').val('');
-      $('input[name="returning_date"]').val('');
-      $('#status-form').submit();
+    table.fnFilter($( "#table-search" ).val());
+
+    $( "#table-search" ).keyup(function() {
+      table.fnFilter($(this).val());
     });
 
-  });
-
-});
 
 
-$('.future-status').on('click',function(){
-
-  $.get("{{URL::to('future')}}/"+$(this).attr('data-id'),function(data){
-
-    $('.modal-container').modal().html(data);
-    $('.date').datetimepicker();
-
-    $('.future-save').on('click',function(){
-      saveFuture();
+    $('.date').datetimepicker({
+      icons: {
+        time: "fa fa-clock-o",
+        date: "fa fa-calendar",
+        up: "fa fa-arrow-up",
+        down: "fa fa-arrow-down"
+      }
     });
 
-    $('.edit-future').on('click',function(){
-      editFuture($(this).attr('data-id'));
-    });
+    $('.status').on('click',function(){
 
-    $('.delete-future').on('click',function(){
-      deleteFuture($(this).attr('data-id'),function(){
+      $.get("{{URL::to('status')}}/"+$(this).attr('data-id'),function(data){
+
+        $('.modal-container').modal().html(data);
+        $('#return-date').datetimepicker();
+
+        $('.status-save').on('click',function(){
+          saveStatus();
+        });
+
+        $('.reset-status').on('click',function(){
+          $('select[name="status"]').val('In');
+          $('input[name="comment"]').val('');
+          $('input[name="returning_date"]').val('');
+          saveStatus();
+        });
 
       });
 
-
     });
 
+
+    $('.future-status').on('click',function(){
+
+      $.get("{{URL::to('future')}}/"+$(this).attr('data-id'),function(data){
+
+        $('.modal-container').modal().html(data);
+        $('.date').datetimepicker();
+
+        $('.future-save').on('click',function(){
+          saveFuture();
+        });
+
+        $('.edit-future').on('click',function(){
+          editFuture($(this).attr('data-id'));
+        });
+
+        $('.delete-future').on('click',function(){
+          deleteFuture($(this).attr('data-id'),function(){
+
+          });
+
+
+        });
+
+      });
+
+    });
   });
+}
 
-});
 
+function saveStatus () {
+  $.post("{{URL::to('status')}}", $('#status-form').serialize(),function(data){
+    $('.modal-container').modal('hide');
+    init();
+  });
+}
 
 
 function saveFuture () {
